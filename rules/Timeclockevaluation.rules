@@ -1,0 +1,73 @@
+import java.util.concurrent.locks.ReentrantLock
+
+val Number SCHALTUHR_1 = 1.0
+val Number SCHALTUHR_2  = 2.0
+val Number ASTRO_1  = 10.0
+val Number ASTRO_2  = 11.0
+val Number KALENDER_1 = 20.0
+val Number KALENDER_2 = 21.0
+
+
+val ReentrantLock lock_zeitauswertung = new ReentrantLock()
+
+
+rule "Timeclock_evaluation"
+
+when
+
+    Member of gTimeclockTrigger received command
+
+then
+
+lock_zeitauswertung.lock()
+try
+{
+    // Loop through all items (member of group gTimeclock), witch can maped to a timeclock.
+    gTimeclock.members.forEach[timeclock_item|{
+        
+        // Loop through all items (member of group gTimeclockselection), whitch contains the timeclockmaping to each item.
+        val selection_item = gTimeclockSelection.members.findFirst[i|i.name == "TIMER_"+timeclock_item.name] as NumberItem
+
+        // Check if a item was found at all with the findFirst method
+        if(selection_item !== null)
+        {
+            // Check if the actual item (temporary stored in timeclock_item) is maped to the matching timeclock
+            if( ((selection_item.state == SCHALTUHR_1) && (triggeringItem.name == "LOCAL_Timersignal_1")) ||
+                ((selection_item.state == SCHALTUHR_2) && (triggeringItem.name == "LOCAL_Timersignal_2")) ||
+                ((selection_item.state == ASTRO_1) && (triggeringItem.name == "LOCAL_Astrotrigger_1")) ||
+                ((selection_item.state == ASTRO_2) && (triggeringItem.name == "LOCAL_Astrotrigger_2")) ||
+                ((selection_item.state == KALENDER_1) && (triggeringItem.name == "LOCAL_Kalender_1")) ||
+                ((selection_item.state == KALENDER_2) && (triggeringItem.name == "LOCAL_Kalender_2")) )
+            {
+                // The actual item matches to a timeclock, so the switch command has to be executed
+                // Here i use the implicit variable for the triggering item
+                if(receivedCommand == ON) 
+                {
+                    // You can control Switches, Dimmers and Color items, as well as Rollershutter
+                    if(timeclock_item.type != "Rollershutter") timeclock_item.sendCommand(ON)
+                    else timeclock_item.sendCommand(DOWN)
+                }
+                else 
+                {
+                    // You can control Switches, Dimmers and Color items, as well as Rollershutter
+                    if(timeclock_item.type != "Rollershutter") timeclock_item.sendCommand(OFF)
+                    else timeclock_item.sendCommand(UP)
+                }
+                // Waittime is optional and im my case its for my RF-Outlets whitch need some time between each switching cycle
+                Thread::sleep(800)
+            }
+        }
+
+    }]
+
+}
+catch(Throwable t)
+{
+    lock_zeitauswertung.unlock()
+}
+finally
+{
+    lock_zeitauswertung.unlock()
+}
+
+end

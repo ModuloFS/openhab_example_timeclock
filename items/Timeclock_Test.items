@@ -1,0 +1,11 @@
+Switch			GF_Livingroom_tablelamp									(gTimeclock)					
+Switch			GF_Livingroom_mainlamp									(gTimeclock)					
+Switch			GF_Livingroom_TVLamp									(gTimeclock)					
+Rollershutter	GF_Livingroom_Rollershutter_WindowNorth					(gTimeclock)					
+Rollershutter	GF_Livingroom_Rollershutter_DoorSouth					(gTimeclock)
+
+Number			TIMER_GF_Livingroom_tablelamp							(gTimeclockSelection, gTimeclockMemory)			
+Number			TIMER_GF_Livingroom_mainlamp							(gTimeclockSelection, gTimeclockMemory)			
+Number			TIMER_GF_Livingroom_TVLamp								(gTimeclockSelection, gTimeclockMemory)			
+Number			TIMER_GF_Livingroom_Rollershutter_WindowNorth			(gTimeclockSelection, gTimeclockMemory)			
+Number			TIMER_GF_Livingroom_Rollershutter_DoorSouth				(gTimeclockSelection, gTimeclockMemory)			

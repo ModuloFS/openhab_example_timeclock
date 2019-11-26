@@ -1,0 +1,128 @@
+sitemap Timeclock label="Zeitschaltung" icon="time"
+{
+
+	Frame label="Zeitschaltuhren"
+	{		
+		/////// Timeclock 1 ///////
+		
+        Text label="Schaltuhr 1 [%s]" item=LOCAL_TimerzeitMessage_1 icon="time" 
+		{
+	
+            Frame label="Einschaltzeit 1" 
+			{
+                Selection item=LOCAL_TimerHour_1_ON_1 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_1_ON_1 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+			
+            Frame label="Ausschaltzeit 1" 
+			{
+                Selection item=LOCAL_TimerHour_1_OFF_1 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_1_OFF_1 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+		
+			
+            Frame label="Wochenprogramm" 
+			{
+                Switch item=LOCAL_TimerdayMonday_1
+                Switch item=LOCAL_TimerdayTuesday_1
+                Switch item=LOCAL_TimerdayWednesday_1
+                Switch item=LOCAL_TimerdayThursday_1
+                Switch item=LOCAL_TimerdayFriday_1
+                Switch item=LOCAL_TimerdaySaturday_1
+                Switch item=LOCAL_TimerdaySunday_1
+            }
+
+			Frame label="Einschaltzeit 2" 
+			{
+                Selection item=LOCAL_TimerHour_2_ON_1 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_2_ON_1 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+			
+            Frame label="Ausschaltzeit 2" 
+			{
+                Selection item=LOCAL_TimerHour_2_OFF_1 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_2_OFF_1 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+
+		}
+			
+
+		/////// Timeclock 2 ///////
+		
+        Text label="Schaltuhr 2 [%s]" item=LOCAL_TimerzeitMessage_2 icon="time" 
+		{
+	
+            Frame label="Einschaltzeit 1" 
+			{
+                Selection item=LOCAL_TimerHour_1_ON_2 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_1_ON_2 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+			
+            Frame label="Ausschaltzeit 1" 
+			{
+                Selection item=LOCAL_TimerHour_1_OFF_2 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_1_OFF_2 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+		
+			
+            Frame label="Wochenprogramm" 
+			{
+                Switch item=LOCAL_TimerdayMonday_2
+                Switch item=LOCAL_TimerdayTuesday_2
+                Switch item=LOCAL_TimerdayWednesday_2
+                Switch item=LOCAL_TimerdayThursday_2
+                Switch item=LOCAL_TimerdayFriday_2
+                Switch item=LOCAL_TimerdaySaturday_2
+                Switch item=LOCAL_TimerdaySunday_2
+            }
+
+
+			Frame label="Einschaltzeit 2" 
+			{
+                Selection item=LOCAL_TimerHour_2_ON_2 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_2_ON_2 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+			
+            Frame label="Ausschaltzeit 2" 
+			{
+                Selection item=LOCAL_TimerHour_2_OFF_2 		mappings=[0.0="00", 1.0="01", 2.0="02", 3.0="03", 4.0="04", 5.0="05", 6.0="06", 7.0="07", 8.0="08", 9.0="09", 10.0="10", 11.0="11", 12.0="12", 13.0="13", 14.0="14", 15.0="15", 16.0="16", 17.0="17", 18.0="18", 19.0="19", 20.0="20", 21.0="21", 22.0="22", 23.0="23"]
+                Selection item=LOCAL_TimerMinute_2_OFF_2 	mappings=[0.0="00", 5.0="05", 10.0="10", 15.0="15", 20.0="20", 25.0="25", 30.0="30", 35.0="35", 40.0="40", 45.0="45", 50.0="50", 55.0="55"]
+            }
+
+		}
+		
+		
+
+		////// Astrofunction //////
+
+		Text label="Astro-Funktion" icon="sun"
+		{
+		
+			Frame label="Astro-Daten"
+			{
+				Text item=LOCAL_NauticDawnStart
+				Text item=LOCAL_NauticDuskEnd
+			}
+	 
+			Frame label="Schalteinstellungen"
+			{
+				Selection item=LOCAL_TriggerdelaySunset_1 	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="Kein Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+				Selection item=LOCAL_OntimeAfterSunset_1 	mappings=[1200.0="20:00 Uhr", 1215.0="20:15 Uhr", 1230.0="20:30 Uhr", 1245.0="20:45 Uhr", 1260.0="21:00 Uhr", 1275.0="21:15 Uhr", 1290.0="21:30 Uhr", 1305.0="21:45 Uhr", 1320.0="22:00 Uhr", 1335.0="22:15 Uhr", 1350.0="22:30 Uhr", 1365.0="22:45 Uhr", 1380.0="23:00 Uhr", 1395.0="23:15 Uhr", 1410.0="23:30 Uhr", 1425.0="23:45 Uhr", 1440.0="00:00 Uhr", 15.0="00:15 Uhr", 30.0="00:30 Uhr", 45.0="00:45 Uhr", 60.0="01:00 Uhr", 75.0="01:15 Uhr", 90.0="01:30 Uhr", 105.0="01:45 Uhr", 120.0="02:00 Uhr", 5000.0="Durchgehend"]
+		
+				Selection item=LOCAL_OntimeBeforeSunrise_1	mappings=[0.0="Deaktiviert", 15.0="-15 min", 30.0="-30 min", 45.0="-45 min", 60.0="-60 min"]
+				Selection item=LOCAL_OntimeAfterSunrise_1 	mappings=[0.0="Kein Delay", 15.0="15 min", 30.0="30 min", 45.0="45 min", 60.0="60 min"]
+			}
+		
+			Frame label="Schalteinstellungen 2"
+			{
+				Selection item=LOCAL_TriggerdelaySunset_2 	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="Kein Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+				Selection item=LOCAL_OntimeAfterSunset_2 	mappings=[1200.0="20:00 Uhr", 1215.0="20:15 Uhr", 1230.0="20:30 Uhr", 1245.0="20:45 Uhr", 1260.0="21:00 Uhr", 1275.0="21:15 Uhr", 1290.0="21:30 Uhr", 1305.0="21:45 Uhr", 1320.0="22:00 Uhr", 1335.0="22:15 Uhr", 1350.0="22:30 Uhr", 1365.0="22:45 Uhr", 1380.0="23:00 Uhr", 1395.0="23:15 Uhr", 1410.0="23:30 Uhr", 1425.0="23:45 Uhr", 1440.0="00:00 Uhr", 15.0="00:15 Uhr", 30.0="00:30 Uhr", 45.0="00:45 Uhr", 60.0="01:00 Uhr", 75.0="01:15 Uhr", 90.0="01:30 Uhr", 105.0="01:45 Uhr", 120.0="02:00 Uhr", 5000.0="Durchgehend"]
+	
+				Selection item=LOCAL_OntimeBeforeSunrise_2 	mappings=[0.0="Deaktiviert", 15.0="-15 min", 30.0="-30 min", 45.0="-45 min", 60.0="-60 min"]
+				Selection item=LOCAL_OntimeAfterSunrise_2 	mappings=[0.0="Kein Delay", 15.0="15 min", 30.0="30 min", 45.0="45 min", 60.0="60 min"]
+			}
+		
+		}
+	}
+	
+}

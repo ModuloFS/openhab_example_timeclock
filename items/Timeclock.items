@@ -1,0 +1,52 @@
+Switch	DEBUG_ResetTimeclock																							
+
+
+/////// Schaltuhr 1 ///////
+Switch	LOCAL_TimerdayMonday_1		"Montag     [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayTuesday_1		"Dienstag   [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayWednesday_1	"Mittwoch   [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayThursday_1	"Donnerstag [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayFriday_1		"Freitag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdaySaturday_1	"Samstag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdaySunday_1		"Sonntag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+
+String	LOCAL_TimerzeitMessage_1	"%s"																				
+
+Number	LOCAL_TimerHour_1_ON_1		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_1_ON_1	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_1_OFF_1		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_1_OFF_1	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_2_ON_1		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_2_ON_1	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_2_OFF_1		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_2_OFF_1	"Minute"									<time>		(gTimeclockMemory)			
+
+Switch	LOCAL_Timersignal_1																	(gTimeclockTrigger)							
+
+
+/////// Schaltuhr 2 ///////
+Switch	LOCAL_TimerdayMonday_2		"Montag     [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayTuesday_2		"Dienstag   [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayWednesday_2	"Mittwoch   [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayThursday_2	"Donnerstag [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdayFriday_2		"Freitag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdaySaturday_2	"Samstag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)			
+Switch	LOCAL_TimerdaySunday_2		"Sonntag    [MAP(wochenschalter.map):%s]"	<calendar>	(gTimeclockMemory)
+
+String	LOCAL_TimerzeitMessage_2	"%s"																				
+
+Number	LOCAL_TimerHour_1_ON_2		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_1_ON_2	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_1_OFF_2		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_1_OFF_2	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_2_ON_2		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_2_ON_2	"Minute"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerHour_2_OFF_2		"Stunde"									<time>		(gTimeclockMemory)			
+Number	LOCAL_TimerMinute_2_OFF_2	"Minute"									<time>		(gTimeclockMemory)			
+
+Switch	LOCAL_Timersignal_2																	(gTimeclockTrigger)							
+
+
+/////// Kalender //////////
+Switch	LOCAL_Kalender_1                                                                    (gTimeclockTrigger)																				
+Switch	LOCAL_Kalender_2	                                                                (gTimeclockTrigger)																							

@@ -1,0 +1,393 @@
+var String temp_message
+
+var Number switchphase_1 = 0
+var Number switchphase_2 = 0
+var Number switchphase_ges = 0
+
+var Number ontime1_0 = 0
+var Number offtime1_0 = 0
+var Number ontime2_0 = 0
+var Number offtime2_0 = 0
+
+var Number ontime1_1 = 0
+var Number offtime1_1 = 0
+var Number ontime2_1 = 0
+var Number offtime2_1 = 0
+
+var Number nowtime = 0
+var Number day = 0
+
+var Number switchtimedaynow_0 = 0
+var Number daychange_0 = 0
+
+var Number switchtimedaynow_1 = 0
+var Number daychange_1 = 0
+
+
+rule "Timeclock_Initialization"
+when 
+   Item DEBUG_ResetTimeclock received command ON
+then
+
+	/// Timeclock 1 ///
+    postUpdate(LOCAL_TimerHour_1_ON_1,  21.0) // It is importand that you initialize all your number Data with a Float-Number with comma because Influx-DB is storing and restoring the Data in this form!!
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_1_ON_1, 30.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_1_OFF_1,  23.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_1_OFF_1, 30.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_2_ON_1,  0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_2_ON_1, 0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_2_OFF_1,  0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_2_OFF_1, 0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayMonday_1, ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayTuesday_1,   ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayWednesday_1,   ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayThursday_1, ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayFriday_1,    ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdaySaturday_1,    ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdaySunday_1,    ON)
+	Thread::sleep(10)
+
+	/// Timeclock 2 ///
+    postUpdate(LOCAL_TimerdayMonday_2,     ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayTuesday_2,   ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayWednesday_2,   ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayThursday_2, ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdayFriday_2,    ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdaySaturday_2,    ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerdaySunday_2,    ON)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_1_ON_2,  8.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_1_ON_2, 15.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_1_OFF_2,  16.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_1_OFF_2, 15.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_2_ON_2,  0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerMinute_2_ON_2, 0.0)
+	Thread::sleep(10)
+    postUpdate(LOCAL_TimerHour_2_OFF_2,  0.0)
+	Thread::sleep(10)
+    sendCommand(LOCAL_TimerMinute_2_OFF_2, 0.0)
+	Thread::sleep(10)
+	 
+end
+
+
+/////// Schaltuhr ///////
+ 
+rule "Timeclock_Frontend"
+when
+    
+	//Run every 5 Minutes
+	Time cron "0 0-59/5 * * * ?"
+	
+then
+  
+	/// Timeclock 1 ///
+  
+	// Clear the messagebuffer
+    temp_message = ""
+
+    // Combine the hour and minutes to one string to be displayed in the user interface
+    if (LOCAL_TimerHour_1_ON_1.state < 10.0) { temp_message = "0" } 
+    temp_message = "EIN: " + temp_message + LOCAL_TimerHour_1_ON_1.state.format("%d") + ":"
+
+    if (LOCAL_TimerMinute_1_ON_1.state < 10.0) { temp_message = temp_message + "0" }
+    temp_message = temp_message + LOCAL_TimerMinute_1_ON_1.state.format("%d") + " Uhr || AUS: "
+	
+    if (LOCAL_TimerHour_1_OFF_1.state < 10.0) { temp_message = temp_message + "0" } 
+    temp_message = temp_message + LOCAL_TimerHour_1_OFF_1.state.format("%d") + ":"
+
+    if (LOCAL_TimerMinute_1_OFF_1.state < 10.0) { temp_message = temp_message + "0" }
+    temp_message = temp_message + LOCAL_TimerMinute_1_OFF_1.state.format("%d") + " Uhr"
+	
+    postUpdate(LOCAL_TimerzeitMessage_1, temp_message)
+	
+	
+	/// Timeclock 2 ///
+
+	// Clear the messagebuffer
+    temp_message = ""
+
+    // Combine the hour and minutes to one string to be displayed in the user interface
+    if (LOCAL_TimerHour_1_ON_2.state < 10.0) { temp_message = "0" } 
+    temp_message = "EIN: " + temp_message + LOCAL_TimerHour_1_ON_2.state.format("%d") + ":"
+
+    if (LOCAL_TimerMinute_1_ON_2.state < 10.0) { temp_message = temp_message + "0" }
+    temp_message = temp_message + LOCAL_TimerMinute_1_ON_2.state.format("%d") + " Uhr || AUS: "
+	
+    if (LOCAL_TimerHour_1_OFF_2.state < 10.0) { temp_message = temp_message + "0" } 
+    temp_message = temp_message + LOCAL_TimerHour_1_OFF_2.state.format("%d") + ":"
+
+    if (LOCAL_TimerMinute_1_OFF_2.state < 10.0) { temp_message = temp_message + "0" }
+    temp_message = temp_message + LOCAL_TimerMinute_1_OFF_2.state.format("%d") + " Uhr"
+	
+    postUpdate(LOCAL_TimerzeitMessage_2, temp_message)
+	
+end
+
+
+
+
+rule "Timeclock_Backend"
+when
+
+	//Ausführung alle 5 Minuten, mit einer Minute Offset -> Minute 6, 11, 16, ...., 56
+	Time cron "0 1-59/5 * * * ?"
+	
+then
+		
+    // Calculate the actual time in minutes of day
+    nowtime = now.getMinuteOfDay
+	// Calculate the actual weekday in a number from 1 to 7
+    day = now.getDayOfWeek
+
+	// Calculate the ontime 1 of the timeclock 0 in minute of day
+    ontime1_0 = (LOCAL_TimerHour_1_ON_1.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_1_ON_1.state as DecimalType).intValue
+	
+	// Calculate the offtime 1 of the timeclock 0 in minute of day
+    offtime1_0 = (LOCAL_TimerHour_1_OFF_1.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_1_OFF_1.state as DecimalType).intValue
+	
+	// Calculate the ontime 2 of the timeclock 0 in minute of day
+    ontime2_0 = (LOCAL_TimerHour_2_ON_1.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_2_ON_1.state as DecimalType).intValue
+	
+	// Calculate the offtime 2 of the timeclock 0 in minute of day
+    offtime2_0 = (LOCAL_TimerHour_2_OFF_1.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_2_OFF_1.state as DecimalType).intValue
+
+
+
+	// Section Timeclock 0
+
+	// Search the actual day and chose the right switchtime
+    if (((day == 1) && (LOCAL_TimerdayMonday_1.state == ON)) || 
+		((day == 2) && (LOCAL_TimerdayTuesday_1.state == ON)) || 
+		((day == 3) && (LOCAL_TimerdayWednesday_1.state == ON)) || 
+		((day == 4) && (LOCAL_TimerdayThursday_1.state == ON)) || 
+		((day == 5) && (LOCAL_TimerdayFriday_1.state == ON)) || 
+		((day == 6) && (LOCAL_TimerdaySaturday_1.state == ON)) || 
+		((day == 7) && (LOCAL_TimerdaySunday_1.state == ON))) 
+	{
+		// Switchtime 1 is chosen for the actual day
+		if(switchtimedaynow_0 != 1) daychange_0 = 1	//Edge change at the actual day, in previous day was Switchtime 2 chosen
+
+		switchtimedaynow_0 = 1  
+	}
+	else
+	{
+		// Switchtime 2 is chosen for the actual day
+		if(switchtimedaynow_0 != 2) daychange_0 = 1 //Edge change at the actual day, in previous day was Switchtime 1 chosen
+
+		switchtimedaynow_0 = 2
+	}
+
+
+	// Evaluation of the actual switch phase of switchtime 1
+	if(ontime1_0 < offtime1_0)
+	{
+		// On-/Off-Switchtime is on the same day
+		if((nowtime > ontime1_0) && (nowtime < offtime1_0)) switchphase_1 = 1 // We are actual in the ON-Phase
+		else 												switchphase_1 = 0 // We are actual in the OFF-Phase	
+	}
+	else if(ontime1_0 > offtime1_0)
+	{
+		// On- and Off-Switchtime is on different days (On-Switchtime goes over midnight)
+		if((nowtime > ontime1_0) || (nowtime < offtime1_0)) switchphase_1 = 1 // We are actual in the ON-Phase
+		else 												switchphase_1 = 0 // We are actual in the OFF-Phase
+	}
+	else
+	{
+		// We are actual in the OFF-Phase
+		switchphase_1 = 0
+	}
+
+	// Evaluation of the actual switch phase of switchtime 2
+	if(ontime2_0 < offtime2_0)
+	{
+		// On-/Off-Switchtime is on the same day
+		if((nowtime > ontime2_0) && (nowtime < offtime2_0)) switchphase_2 = 1 // We are actual in the ON-Phase
+		else 												switchphase_2 = 0 // We are actual in the OFF-Phase	
+	}
+	else if(ontime2_0 > offtime2_0)
+	{
+		// On- and Off-Switchtime is on different days (On-Switchtime goes over midnight)
+		if((nowtime > ontime2_0) || (nowtime < offtime2_0)) switchphase_2 = 1 // We are actual in the ON-Phase
+		else 												switchphase_2 = 0 // We are actual in the OFF-Phase
+	}
+	else
+	{
+		// We are actual in the OFF-Phase
+		switchphase_2 = 0
+	}
+
+	// Evaluation witch switchtime / switchphase is actual valid
+
+	// No daychange in terms of switchtime, switchtime 1 is valid
+	if((switchtimedaynow_0 == 1) && (daychange_0 == 0))
+	{
+		switchphase_ges = switchphase_1
+	}
+	// No daychange in terms of switchtime, switchtime 2 is valid
+	else if((switchtimedaynow_0 == 2) && (daychange_0 == 0))
+	{
+		switchphase_ges = switchphase_2
+	}
+	// A daychange in terms of switchtime has taken place. The switchtime changes from switchtime 2 to switchtime 1. 
+	// If the ontime of switchtime 2 goes into switchtime 1 then this ontime is going to be done and after that it has to be changed comletely to switchtime 1.
+	else if((switchtimedaynow_0 == 1) && (daychange_0 > 0))
+	{
+		if((switchphase_1 == 1) || (switchphase_2 == 1)) 	switchphase_ges = 1
+		else 												switchphase_ges = 0
+
+		if(switchphase_2 == 0) daychange_0 = 0 // now switchtime 2 has finished its ontime, change completely to switchtime 1
+	}
+	// A daychange in terms of switchtime has taken place. The switchtime changes from switchtime 1 to switchtime 2. 
+	// If the ontime of switchtime 2 goes into switchtime 1 then this ontime is going to be done and after that it has to be changed comletely to switchtime 2.
+	else if((switchtimedaynow_0 == 2) && (daychange_0 > 0))
+	{
+		if((switchphase_1 == 1) || (switchphase_2 == 1)) 	switchphase_ges = 1
+		else 												switchphase_ges = 0
+
+		if(switchphase_1 == 0) daychange_0 = 0 // now switchtime 1 has finished its ontime, change completely to switchtime 2	
+	}
+
+	// Evaluation of the switching edge, only send a switchcommand at the edge change. 
+	if((switchphase_ges == 1) && (LOCAL_Timersignal_1.state != ON)) 		sendCommand(LOCAL_Timersignal_1, ON)
+	else if((switchphase_ges == 0) && (LOCAL_Timersignal_1.state != OFF)) 	sendCommand(LOCAL_Timersignal_1, OFF)
+
+	
+
+	
+	/// Schaltuhr 2 ///
+
+	// calculate the ontime 1 of timeclock 2 in minute of day
+    ontime1_1 = (LOCAL_TimerHour_1_ON_2.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_1_ON_2.state as DecimalType).intValue
+	
+    // calculate the ontime 1 of timeclock 2 in minute of day
+    offtime1_1 = (LOCAL_TimerHour_1_OFF_2.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_1_OFF_2.state as DecimalType).intValue
+
+    // calculate the ontime 1 of timeclock 2 in minute of day
+    ontime2_1 = (LOCAL_TimerHour_2_ON_2.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_2_ON_2.state as DecimalType).intValue
+	
+    // calculate the ontime 1 of timeclock 2 in minute of day
+    offtime2_1 = (LOCAL_TimerHour_2_OFF_2.state as DecimalType).intValue * 60 + (LOCAL_TimerMinute_2_OFF_2.state as DecimalType).intValue
+
+
+
+    if (((day == 1) && (LOCAL_TimerdayMonday_2.state == ON)) || 
+		((day == 2) && (LOCAL_TimerdayTuesday_2.state == ON)) || 
+		((day == 3) && (LOCAL_TimerdayWednesday_2.state == ON)) || 
+		((day == 4) && (LOCAL_TimerdayThursday_2.state == ON)) || 
+		((day == 5) && (LOCAL_TimerdayFriday_2.state == ON)) || 
+		((day == 6) && (LOCAL_TimerdaySaturday_2.state == ON)) || 
+		((day == 7) && (LOCAL_TimerdaySunday_2.state == ON))) 
+	{
+		// Ein-/Auschaltzeit 1 ist für den aktuellen Tag gewählt
+		if(switchtimedaynow_1 != 1) daychange_1 = 1	//Flankenwechsel im gewählten Tag, vorhergehender Tag war Ein-/Ausschaltzeit 2 gewählt
+
+		switchtimedaynow_1 = 1  
+	}
+	else
+	{
+		// Ein-/Ausschaltzeit 2 ist für den aktuellen Tag gewählt
+		if(switchtimedaynow_1 != 2) daychange_1 = 1 //Flankenwechsel im gwählten Tag, vorhergehender Tag war Ein-/Ausschaltzeit 1 gewählt
+
+		switchtimedaynow_1 = 2
+	}
+
+
+	// Auswertung der aktuellen Schaltphase für Schaltzeit 1
+
+	if(ontime1_1 < offtime1_1)
+	{
+		// Ein-/Ausschaltzeit befindet sich am gleichen Tag
+		if((nowtime > ontime1_1) && (nowtime < offtime1_1)) switchphase_1 = 1 // Wir befinden uns aktell in der EIN-Phase
+		else 												switchphase_1 = 0 // Wir befinden uns aktuell in der AUS-Phase	
+	}
+	else if(ontime1_1 > offtime1_1)
+	{
+		// Ein-/Ausschaltzeit befindet sich an unterschiedlichen Tagen (Einzeit geht über Mitternacht hinaus)
+		if((nowtime > ontime1_1) || (nowtime < offtime1_1))	switchphase_1 = 1 // Wir befinden uns aktuell in der EIN-Phase
+		else 												switchphase_1 = 0 // Wir befinden uns aktuell in der AUS-Phase
+	}
+	else
+	{
+		// wir befinden uns in der AUS-Phase
+		switchphase_1 = 0
+	}
+
+	// Auswertung der aktuellen Schaltphase für Schaltzeit 2
+
+	if(ontime2_1 < offtime2_1)
+	{
+		// Ein-/Ausschaltzeit befindet sich am gleichen Tag
+		if((nowtime > ontime2_1) && (nowtime < offtime2_1)) switchphase_2 = 1 // Wir befinden uns aktell in der EIN-Phase
+		else 												switchphase_2 = 0 // Wir befinden uns aktuell in der AUS-Phase	
+	}
+	else if(ontime2_0 > offtime2_0)
+	{
+		// Ein-/Ausschaltzeit befindet sich an unterschiedlichen Tagen (Einzeit geht über Mitternacht hinaus)
+		if((nowtime > ontime2_1) || (nowtime < offtime2_1))	switchphase_2 = 1 // Wir befinden uns aktuell in der EIN-Phase
+		else 												switchphase_2 = 0 // Wir befinden uns aktuell in der AUS-Phase
+	}
+	else
+	{
+		// wir befinden uns in der AUS-Phase
+		switchphase_2 = 0
+	}
+
+
+	// Kein tagwechsel tag für Schaltzeit 1 zählt alles ok
+	if((switchtimedaynow_1 == 1) && (daychange_1 == 0))
+	{
+		switchphase_ges = switchphase_1
+	}
+	// Kein Tagwechsel Tag für Schaltzeit 2 zählt
+	else if((switchtimedaynow_1 == 2) && (daychange_1 == 0))
+	{
+		switchphase_ges = switchphase_2
+	}
+	// Es hat ein Tagwechsel von Schaltzeit 2 auf Schaltzeit 1 stattgefunden, sollten Schaltzeiten von Schaltzeit 2 in die Schaltzeit 1 hineinragen werden diese noch ausgefahren und dann beendet.
+	else if((switchtimedaynow_1 == 1) && (daychange_1 > 0))
+	{
+		if((switchphase_1 == 1) || (switchphase_2 == 1))	switchphase_ges = 1
+		else 												switchphase_ges = 0
+
+		if(switchphase_2 == 0) daychange_1 = 0
+	}
+	// Es hat ein Tagwechsel von Schaltzeit 1 auf Schaltzeit 2 stattgefunden, sollten Schaltzeiten von Schaltzeit 1 in die Schaltzeit 2 hineinragen werden diese noch ausgefahren und dann beendet.
+	else if((switchtimedaynow_1 == 2) && (daychange_1 > 0))
+	{
+		if((switchphase_1 == 1) || (switchphase_2 == 1)) 	switchphase_ges = 1
+		else 												switchphase_ges = 0
+
+		if(switchphase_1 == 0) daychange_1 = 0		
+	}
+
+	// Flankenauswertung
+	if((switchphase_ges == 1) && (LOCAL_Timersignal_2.state != ON)) 		sendCommand(LOCAL_Timersignal_2, ON)
+	else if((switchphase_ges == 0) && (LOCAL_Timersignal_2.state != OFF)) 	sendCommand(LOCAL_Timersignal_2, OFF)
+ 
+end
