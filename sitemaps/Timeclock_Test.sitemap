@@ -11,12 +11,12 @@ sitemap Timeclock_Test label="Timeclock Test" icon="time"
 
         Text label="Timeclock Settings" icon="time" 
         {
-            Selection item=TIMER_GF_Livingroom_tablelamp                    icon="lightbulb"    label="Tablelamp"       mappings=[0.0="Zeitsteuerung AUS", 1.0="Schaltuhr 1", 2.0="Schaltuhr 2", 10.0="Astro-Funktion 1", 11.0="Astro-Funktion 2", 20.0="Kalender 1", 21.0="Kalender 2"]
-            Selection item=TIMER_GF_Livingroom_mainlamp                     icon="lightbulb"    label="Overhead Light"  mappings=[0.0="Zeitsteuerung AUS", 1.0="Schaltuhr 1", 2.0="Schaltuhr 2", 10.0="Astro-Funktion 1", 11.0="Astro-Funktion 2", 20.0="Kalender 1", 21.0="Kalender 2"]
-            Selection item=TIMER_GF_Livingroom_TVLamp                       icon="lightbulb"    label="TV Lamp"         mappings=[0.0="Zeitsteuerung AUS", 1.0="Schaltuhr 1", 2.0="Schaltuhr 2", 10.0="Astro-Funktion 1", 11.0="Astro-Funktion 2", 20.0="Kalender 1", 21.0="Kalender 2"]
+            Selection item=TIMER_GF_Livingroom_tablelamp                    icon="lightbulb"    label="Tablelamp"       mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
+            Selection item=TIMER_GF_Livingroom_mainlamp                     icon="lightbulb"    label="Overhead Light"  mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
+            Selection item=TIMER_GF_Livingroom_TVLamp                       icon="lightbulb"    label="TV Lamp"         mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
         
-            Selection item=TIMER_GF_Livingroom_Rollershutter_WindowNorth    icon="blinds"       label="Window North"    mappings=[0.0="Zeitsteuerung AUS", 1.0="Schaltuhr 1", 2.0="Schaltuhr 2", 10.0="Astro-Funktion 1", 11.0="Astro-Funktion 2", 20.0="Kalender 1", 21.0="Kalender 2"]
-            Selection item=TIMER_GF_Livingroom_Rollershutter_DoorSouth      icon="blinds"       label="Door South"      mappings=[0.0="Zeitsteuerung AUS", 1.0="Schaltuhr 1", 2.0="Schaltuhr 2", 10.0="Astro-Funktion 1", 11.0="Astro-Funktion 2", 20.0="Kalender 1", 21.0="Kalender 2"]
+            Selection item=TIMER_GF_Livingroom_Rollershutter_WindowNorth    icon="blinds"       label="Window North"    mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
+            Selection item=TIMER_GF_Livingroom_Rollershutter_DoorSouth      icon="blinds"       label="Door South"      mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
         }
     }
 }

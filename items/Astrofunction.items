@@ -1,21 +1,20 @@
-Switch		DEBUG_ResetAstroclock
-																									
-DateTime	LOCAL_NauticDawnStart			"Sonnenaufgang [%1$tH:%1$tM Uhr]"				<sunrise>								
-DateTime	LOCAL_NauticDuskEnd				"Sonnenuntergang [%1$tH:%1$tM Uhr]"				<sunset>								
+Switch		DEBUG_ResetAstroclock												
+DateTime	LOCAL_NauticDawnStart												
+DateTime	LOCAL_NauticDuskEnd													
 
-////// Astro Funktion //////
-Number		LOCAL_TriggerdelaySunset_1		"Einschaltzeit vor/nach Sonnenuntergang"		<sunset>	(gTimeclockMemory)			
-Number		LOCAL_OntimeAfterSunset_1		"Ausschaltzeit nach Sonnenuntergang"			<moon>	    (gTimeclockMemory)			
-Number		LOCAL_OntimeBeforeSunrise_1		"Einschaltzeit vor Sonnenaufgang"				<sunrise>	(gTimeclockMemory)			
-Number		LOCAL_OntimeAfterSunrise_1		"Ausschaltverz\u00F6gerung nach Sonnenaufgang"	<sun>	    (gTimeclockMemory)
+// Astrotimeclock 1
+Number		LOCAL_TriggerdelaySunset_1				(gTimeclockMemory)			
+Number		LOCAL_OntimeAfterSunset_1				(gTimeclockMemory)			
+Number		LOCAL_OntimeBeforeSunrise_1				(gTimeclockMemory)			
+Number		LOCAL_OntimeAfterSunrise_1				(gTimeclockMemory)
 
-Switch		LOCAL_Astrotrigger_1																		(gTimeclockTrigger)			
+Switch		LOCAL_Astrotrigger_1					(gTimeclockTrigger)			
 
 
-////// Astro Funktion 2 //////
-Number		LOCAL_TriggerdelaySunset_2		"Einschaltzeit vor/nach Sonnenuntergang"		<sunset>	(gTimeclockMemory)			
-Number		LOCAL_OntimeAfterSunset_2		"Ausschaltzeit nach Sonnenuntergang"			<moon>	    (gTimeclockMemory)			
-Number		LOCAL_OntimeBeforeSunrise_2		"Einschaltzeit vor Sonnenaufgang"				<sunrise>	(gTimeclockMemory)			
-Number		LOCAL_OntimeAfterSunrise_2		"Ausschaltverz\u00F6gerung nach Sonnenaufgang"	<sun>	    (gTimeclockMemory)
-			
-Switch		LOCAL_Astrotrigger_2																		(gTimeclockTrigger)				
+// Astrotimeclock 2
+Number		LOCAL_TriggerdelaySunset_2				(gTimeclockMemory)			
+Number		LOCAL_OntimeAfterSunset_2				(gTimeclockMemory)			
+Number		LOCAL_OntimeBeforeSunrise_2				(gTimeclockMemory)			
+Number		LOCAL_OntimeAfterSunrise_2				(gTimeclockMemory)
+
+Switch		LOCAL_Astrotrigger_2					(gTimeclockTrigger)					
