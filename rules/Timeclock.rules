@@ -104,8 +104,8 @@ end
 rule "Timeclock_Frontend"
 when
     
-	//Run every 5 Minutes
-	Time cron "0 0-59/5 * * * ?"
+	//Runs every minute
+	Time cron "0 */1 * * * ?"
 	
 then
   

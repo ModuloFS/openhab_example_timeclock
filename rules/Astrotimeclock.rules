@@ -62,8 +62,8 @@ end
 
 rule "Astrotimeclock_backend"
 when
-	// Run every 1 minutes with an offset of 2 minutes
-	Time cron "0 */1 * * * ?"
+	// Runs every minute with an offset of 30 seconds
+	Time cron "30 */1 * * * ?"
 
 then
 
