@@ -20,6 +20,7 @@ when
 	Item DEBUG_ResetAstroclock received command ON
 then
 
+	// Astrotimeclock 1
 	postUpdate(LOCAL_TriggerdelaySunset_1, 60.0)
 	Thread::sleep(10)
  	postUpdate(LOCAL_OntimeAfterSunset_1, 60.0)
@@ -27,15 +28,29 @@ then
  	postUpdate(LOCAL_OntimeBeforeSunrise_1, 0.0)
 	Thread::sleep(10)
  	postUpdate(LOCAL_OntimeAfterSunrise_1, 0.0) 
-
 	Thread::sleep(10)
+
+	// Astrotimeclock 2
 	postUpdate(LOCAL_TriggerdelaySunset_2, 60.0)
 	Thread::sleep(10)
  	postUpdate(LOCAL_OntimeAfterSunset_2, 60.0)
 	Thread::sleep(10)	
  	postUpdate(LOCAL_OntimeBeforeSunrise_2, 0.0)
 	Thread::sleep(10)
- 	postUpdate(LOCAL_OntimeAfterSunrise_2, 0.0) 
+ 	postUpdate(LOCAL_OntimeAfterSunrise_2, 0.0)
+	Thread::sleep(10)
+	
+	// Astrotimelcock Rollershutter 1
+ 	postUpdate(LOCAL_TriggerdelaySunsetRollo_1, 60.0) 
+	Thread::sleep(10)
+	postUpdate(LOCAL_TriggerdelaySunriseRollo_1, 60.0) 
+	Thread::sleep(10)
+
+	// Astrotimelcock Rollershutter 2
+	postUpdate(LOCAL_TriggerdelaySunsetRollo_2, 60.0) 
+	Thread::sleep(10)
+	postUpdate(LOCAL_TriggerdelaySunriseRollo_2, 60.0) 
+	Thread::sleep(10)
 	 
 end
 
@@ -62,7 +77,7 @@ end
 
 rule "Astrotimeclock_backend"
 when
-	// Runs every minute with an offset of 30 seconds
+	// Run every minute with an offset of 30 seconds
 	Time cron "30 */1 * * * ?"
 
 then
@@ -77,8 +92,11 @@ then
 	
 	// Actual time in minute of day
 	now_minute_of_day = now.getMinuteOfDay
+
+
+	// Astrotimeclock 1
 	
-	// Switch-on-time at sunset
+	// Switch-on-time at sunset, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
 	on_sunset = sunset_minute_of_day - 60 + (LOCAL_TriggerdelaySunset_1.state as DecimalType)
 	if(on_sunset < 0) on_sunset = on_sunset + 1440 // Catch overflow
 
@@ -90,7 +108,7 @@ then
 	else on_sunrise = 0
 
 	// Switch-off-time at/after sunrise
-	off_sunrise = sunrise_minute_of_day + (LOCAL_OntimeAfterSunrise_1.state as Number)
+	off_sunrise = sunrise_minute_of_day + (LOCAL_OntimeAfterSunrise_1.state as DecimalType)
 
 	// Check if onphase is between sunset and sunrise +- the offsets
 	if(off_sunset > 1440)
@@ -129,7 +147,7 @@ then
 
 	// Astrotimeclock 2
 
-	// Switch-on-time at sunset
+	// Switch-on-time at sunset, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
 	on_sunset = sunset_minute_of_day - 60 + (LOCAL_TriggerdelaySunset_2.state as DecimalType)
 	if(on_sunset < 0) on_sunset = on_sunset + 1440 // Überlauf abfangen
 
@@ -177,5 +195,60 @@ then
 	if((switchphase == 1) && (LOCAL_Astrotrigger_2.state != ON)) 		sendCommand(LOCAL_Astrotrigger_2, ON)
 	else if((switchphase == 0) && (LOCAL_Astrotrigger_2.state != OFF)) 	sendCommand(LOCAL_Astrotrigger_2, OFF)
 
+
+	// Astrotimeclock Rollershutter 1
+
+	// Switch-on-time at sunset, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
+	on_sunset = sunset_minute_of_day - 60 + (LOCAL_TriggerdelaySunsetRollo_1.state as DecimalType)
+	if(on_sunset < 0) on_sunset = on_sunset + 1440 // Catch overflow
+
+	// Switch-off-time at/after sunrise, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
+	off_sunrise = sunrise_minute_of_day - 60 + (LOCAL_TriggerdelaySunriseRollo_1.state as DecimalType)
+	if(off_sunrise < 0) off_sunrise = off_sunrise + 1440 // Catch overflow
+
+	if(off_sunrise < on_sunset)
+	{
+		// Normal case, if sunset is on one day and sunrise is on the next day
+		if((now_minute_of_day > on_sunset) || (now_minute_of_day < off_sunrise))	switchphase = 1 // We are actual in the ON-Phase
+		else 																		switchphase = 0 // We are actual in the OFF-Phase
+	}
+	else
+	{
+		// Case if sunset and sunrise is on the same day
+		if((now_minute_of_day > on_sunset) && (now_minute_of_day < off_sunrise))	switchphase = 1 // We are actual in the ON-Phase
+		else																		switchphase = 0 // We are actual in the OFF-Phase
+	}
+
+	// Evaluation of the switching edge, only send a switchcommand at the edge change.
+	if((switchphase == 1) && (LOCAL_Rollo_Astrotrigger_1.state != ON)) 			sendCommand(LOCAL_Rollo_Astrotrigger_1, ON)
+	else if((switchphase == 0) && (LOCAL_Rollo_Astrotrigger_1.state != OFF)) 	sendCommand(LOCAL_Rollo_Astrotrigger_1, OFF)
+
+
+	// Astrotimeclock Rollershutter 2
+
+	// Switch-on-time at sunset, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
+	on_sunset = sunset_minute_of_day - 60 + (LOCAL_TriggerdelaySunsetRollo_2.state as DecimalType)
+	if(on_sunset < 0) on_sunset = on_sunset + 1440 // Catch overflow
+
+	// Switch-off-time at/after sunrise, you have to add an offset of -60 because a mapping in the sidemap can only be equal or bigger than 0
+	off_sunrise = sunrise_minute_of_day - 60 + (LOCAL_TriggerdelaySunriseRollo_2.state as DecimalType)
+	if(off_sunrise < 0) off_sunrise = off_sunrise + 1440 // Catch overflow
+
+	if(off_sunrise < on_sunset)
+	{
+		// Normal case, if sunset is on one day and sunrise is on the next day
+		if((now_minute_of_day > on_sunset) || (now_minute_of_day < off_sunrise))	switchphase = 1 // We are actual in the ON-Phase
+		else 																		switchphase = 0 // We are actual in the OFF-Phase
+	}
+	else
+	{
+		// Case if sunset and sunrise is on the same day
+		if((now_minute_of_day > on_sunset) && (now_minute_of_day < off_sunrise))	switchphase = 1 // We are actual in the ON-Phase
+		else																		switchphase = 0 // We are actual in the OFF-Phase
+	}
+
+	// Evaluation of the switching edge, only send a switchcommand at the edge change.
+	if((switchphase == 1) && (LOCAL_Rollo_Astrotrigger_2.state != ON)) 			sendCommand(LOCAL_Rollo_Astrotrigger_2, ON)
+	else if((switchphase == 0) && (LOCAL_Rollo_Astrotrigger_2.state != OFF)) 	sendCommand(LOCAL_Rollo_Astrotrigger_2, OFF)
 
 end

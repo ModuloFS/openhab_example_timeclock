@@ -1,0 +1,11 @@
+astro:sun:home [ geolocation="<latitude>,<longitude>[,<altitude in m>]", interval=3600 ] {
+    Channels:
+        Type start : nauticDawn#start [
+            earliest="04:00",
+            latest="10:00"
+        ]
+        Type start : nauticDusk#start [
+            earliest="15:00",
+            latest="23:59"
+        ]
+}

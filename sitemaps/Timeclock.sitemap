@@ -1,6 +1,12 @@
 sitemap Timeclock label="Timeclock" icon="time"
 {
 
+    Frame label="Astrodata"
+    {
+        Text item=LOCAL_NauticDawnStart     label="Sunrise  [%1$tH:%1$tM Uhr]"				icon="sunrise"
+        Text item=LOCAL_NauticDuskEnd       label="Sunset   [%1$tH:%1$tM Uhr]"				icon="sunset"
+    }
+
 	Frame label="Timeclocks"
 	{		
 		// Timeclock 1
@@ -89,37 +95,55 @@ sitemap Timeclock label="Timeclock" icon="time"
 
 		}
 		
-		
+    }
 
-		// Astrotimeclock 1 and 2
-		Text label="Astrotimeclock" icon="sun"
+    Frame label="Astrotimeclocks"
+    {	
+
+		// Astrotimeclock 1
+		Text label="Astrotimeclock 1" icon="sun"
 		{
-		
-			Frame label="Astro-Data"
-			{
-				Text item=LOCAL_NauticDawnStart     label="Sunrise  [%1$tH:%1$tM Uhr]"				icon="sunrise"
-				Text item=LOCAL_NauticDuskEnd       label="Sunset   [%1$tH:%1$tM Uhr]"				icon="sunset"
-			}
-	 
-			Frame label="Astrotimeclock 1"
+			Frame label="Sunset"
 			{
 				Selection item=LOCAL_TriggerdelaySunset_1   label="Ontime before/after Sunset"		icon="sunset"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
 				Selection item=LOCAL_OntimeAfterSunset_1    label="Offtime"			                icon="moon"	    mappings=[1200.0="20:00 Uhr", 1215.0="20:15 Uhr", 1230.0="20:30 Uhr", 1245.0="20:45 Uhr", 1260.0="21:00 Uhr", 1275.0="21:15 Uhr", 1290.0="21:30 Uhr", 1305.0="21:45 Uhr", 1320.0="22:00 Uhr", 1335.0="22:15 Uhr", 1350.0="22:30 Uhr", 1365.0="22:45 Uhr", 1380.0="23:00 Uhr", 1395.0="23:15 Uhr", 1410.0="23:30 Uhr", 1425.0="23:45 Uhr", 1440.0="00:00 Uhr", 15.0="00:15 Uhr", 30.0="00:30 Uhr", 45.0="00:45 Uhr", 60.0="01:00 Uhr", 75.0="01:15 Uhr", 90.0="01:30 Uhr", 105.0="01:45 Uhr", 120.0="02:00 Uhr", 5000.0="till sunrise"]
-		
+            }
+            Frame label="Sunrise"
+            {		
 				Selection item=LOCAL_OntimeBeforeSunrise_1  label="Ontime before Sunrise"	        icon="sunrise"	mappings=[0.0="Deaktivated", 15.0="-15 min", 30.0="-30 min", 45.0="-45 min", 60.0="-60 min"]
 				Selection item=LOCAL_OntimeAfterSunrise_1   label="Offtime-delay after Sunrise"	    icon="sun"	    mappings=[0.0="No Delay", 15.0="15 min", 30.0="30 min", 45.0="45 min", 60.0="60 min"]
 			}
+        }
+
+        // Astrotimeclock 2
+        Text label="Astrotimeclock 2" icon="sun"
+		{
 		
-			Frame label="Astrotimeclock 2"
+			Frame label="Sunset"
 			{
 				Selection item=LOCAL_TriggerdelaySunset_2   label="Ontime before/after Sunset"		icon="sunset"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
 				Selection item=LOCAL_OntimeAfterSunset_2    label="Offtime"			                icon="moon"	    mappings=[1200.0="20:00 Uhr", 1215.0="20:15 Uhr", 1230.0="20:30 Uhr", 1245.0="20:45 Uhr", 1260.0="21:00 Uhr", 1275.0="21:15 Uhr", 1290.0="21:30 Uhr", 1305.0="21:45 Uhr", 1320.0="22:00 Uhr", 1335.0="22:15 Uhr", 1350.0="22:30 Uhr", 1365.0="22:45 Uhr", 1380.0="23:00 Uhr", 1395.0="23:15 Uhr", 1410.0="23:30 Uhr", 1425.0="23:45 Uhr", 1440.0="00:00 Uhr", 15.0="00:15 Uhr", 30.0="00:30 Uhr", 45.0="00:45 Uhr", 60.0="01:00 Uhr", 75.0="01:15 Uhr", 90.0="01:30 Uhr", 105.0="01:45 Uhr", 120.0="02:00 Uhr", 5000.0="till sunrise"]
-	
+            }
+            Frame label="Sunrise"
+            {
 				Selection item=LOCAL_OntimeBeforeSunrise_2  label="Ontime before Sunrise"	        icon="sunrise"	mappings=[0.0="Deaktivated", 15.0="-15 min", 30.0="-30 min", 45.0="-45 min", 60.0="-60 min"]
 				Selection item=LOCAL_OntimeAfterSunrise_2   label="Offtime-delay after Sunrise"	    icon="sun"	    mappings=[0.0="No Delay", 15.0="15 min", 30.0="30 min", 45.0="45 min", 60.0="60 min"]
 			}
-		
 		}
-	}
-	
+
+        // Astrotimeclock Rollershutter 1
+        Text label="Astrotimeclock Rollershutter 1" icon="sun"
+        {
+ 			Selection item=LOCAL_TriggerdelaySunsetRollo_1 	label="On-/Downtime before/after Sunset"    icon="sunset"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+			Selection item=LOCAL_TriggerdelaySunriseRollo_1	label="Off-/Uptime before/after Sunrise"	icon="sunrise"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+        }
+
+        // Astrotimeclock Rollershutter 2
+        Text label="Astrotimeclock Rollershutter 2" icon="sun"
+        {
+ 			Selection item=LOCAL_TriggerdelaySunsetRollo_2 	label="On-/Downtime before/after Sunset"    icon="sunset"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+			Selection item=LOCAL_TriggerdelaySunriseRollo_2	label="Off-/Uptime before/after Sunrise"	icon="sunrise"	mappings=[0.0="-60 min", 15.0="-45 min", 30.0="-30 min", 45.0="-15 min", 60.0="No Delay", 75.0="+15 min", 90.0="+30 min", 105.0="+45 min", 120.0="+60 min"]
+        }
+
+	}	
 }

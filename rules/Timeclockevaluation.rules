@@ -7,6 +7,9 @@ val Number ASTRO_2  = 11.0
 val Number KALENDER_1 = 20.0
 val Number KALENDER_2 = 21.0
 
+val Number ASTRO_ROLLO_1 = 30
+val Number ASTRO_ROLLO_2 = 31
+
 
 val ReentrantLock lock_zeitauswertung = new ReentrantLock()
 
@@ -37,7 +40,9 @@ try
                 ((selection_item.state == ASTRO_1) && (triggeringItem.name == "LOCAL_Astrotrigger_1")) ||
                 ((selection_item.state == ASTRO_2) && (triggeringItem.name == "LOCAL_Astrotrigger_2")) ||
                 ((selection_item.state == KALENDER_1) && (triggeringItem.name == "LOCAL_Kalender_1")) ||
-                ((selection_item.state == KALENDER_2) && (triggeringItem.name == "LOCAL_Kalender_2")) )
+                ((selection_item.state == KALENDER_2) && (triggeringItem.name == "LOCAL_Kalender_2")) ||
+                ((selection_item.state == ASTRO_ROLLO_1) && (triggeringItem.name == "LOCAL_Rollo_Astrotrigger_1")) ||
+                ((selection_item.state == ASTRO_ROLLO_2) && (triggeringItem.name == "LOCAL_Rollo_Astrotrigger_2")) )
             {
                 // The actual item matches to a timeclock, so the switch command has to be executed
                 // Here i use the implicit variable for the triggering item

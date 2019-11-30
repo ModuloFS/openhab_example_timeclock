@@ -1,8 +1,9 @@
-Switch		DEBUG_ResetAstroclock												
-DateTime	LOCAL_NauticDawnStart												
-DateTime	LOCAL_NauticDuskEnd													
+Switch		DEBUG_ResetAstroclock
 
-// Astrotimeclock 1
+DateTime	LOCAL_NauticDawnStart   {channel="astro:sun:home:nauticDawn#start"}												
+DateTime	LOCAL_NauticDuskEnd		{channel="astro:sun:home:nauticDusk#start"}											
+
+////// Astro Funktion //////
 Number		LOCAL_TriggerdelaySunset_1				(gTimeclockMemory)			
 Number		LOCAL_OntimeAfterSunset_1				(gTimeclockMemory)			
 Number		LOCAL_OntimeBeforeSunrise_1				(gTimeclockMemory)			
@@ -11,10 +12,22 @@ Number		LOCAL_OntimeAfterSunrise_1				(gTimeclockMemory)
 Switch		LOCAL_Astrotrigger_1					(gTimeclockTrigger)			
 
 
-// Astrotimeclock 2
+////// Astro Funktion 2 //////
 Number		LOCAL_TriggerdelaySunset_2				(gTimeclockMemory)			
 Number		LOCAL_OntimeAfterSunset_2				(gTimeclockMemory)			
 Number		LOCAL_OntimeBeforeSunrise_2				(gTimeclockMemory)			
 Number		LOCAL_OntimeAfterSunrise_2				(gTimeclockMemory)
 
-Switch		LOCAL_Astrotrigger_2					(gTimeclockTrigger)					
+Switch		LOCAL_Astrotrigger_2					(gTimeclockTrigger)			
+
+
+/////// Astro Funktion Rollo ////////
+Number		LOCAL_TriggerdelaySunsetRollo_1		    (gTimeclockMemory)			
+Number		LOCAL_TriggerdelaySunriseRollo_1		(gTimeclockMemory)
+
+Switch      LOCAL_Rollo_Astrotrigger_1              (gTimeclockTrigger)
+
+Number		LOCAL_TriggerdelaySunsetRollo_2		    (gTimeclockMemory)			
+Number		LOCAL_TriggerdelaySunriseRollo_2		(gTimeclockMemory)
+
+Switch      LOCAL_Rollo_Astrotrigger_2              (gTimeclockTrigger)				
