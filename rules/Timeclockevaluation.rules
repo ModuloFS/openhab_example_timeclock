@@ -7,8 +7,8 @@ val Number ASTRO_2  = 11.0
 val Number KALENDER_1 = 20.0
 val Number KALENDER_2 = 21.0
 
-val Number ASTRO_ROLLO_1 = 30
-val Number ASTRO_ROLLO_2 = 31
+val Number ASTRO_ROLLO_1 = 30.0
+val Number ASTRO_ROLLO_2 = 31.0
 
 
 val ReentrantLock lock_zeitauswertung = new ReentrantLock()
