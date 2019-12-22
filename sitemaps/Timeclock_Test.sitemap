@@ -9,7 +9,7 @@ sitemap Timeclock_Test label="Timeclock Test" icon="time"
             Switch	item=GF_Livingroom_Rollershutter_WindowNorth    icon="blinds"       label="Window North"										
             Switch	item=GF_Livingroom_Rollershutter_DoorSouth      icon="blinds"       label="Door South"
 
-        Text label="Timeclock Settings" icon="time" 
+        Text label="Timeclock Mappings" icon="time" 
         {
             Selection item=TIMER_GF_Livingroom_tablelamp                    icon="lightbulb"    label="Tablelamp"       mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
             Selection item=TIMER_GF_Livingroom_mainlamp                     icon="lightbulb"    label="Overhead Light"  mappings=[0.0="Timeclock OFF", 1.0="Timeclock 1", 2.0="Timeclock 2", 10.0="Astrotimeclock 1", 11.0="Astrotimeclock 2", 20.0="Calendar 1", 21.0="Calendar 2"]
