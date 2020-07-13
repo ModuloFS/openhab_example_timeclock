@@ -1,5 +1,3 @@
-import java.util.concurrent.locks.ReentrantLock
-
 val Number SCHALTUHR_1 = 1.0
 val Number SCHALTUHR_2  = 2.0
 val Number ASTRO_1  = 10.0
@@ -11,9 +9,6 @@ val Number ASTRO_ROLLO_1 = 30.0
 val Number ASTRO_ROLLO_2 = 31.0
 
 
-val ReentrantLock lock_zeitauswertung = new ReentrantLock()
-
-
 rule "Timeclock_evaluation"
 
 when
@@ -22,13 +17,19 @@ when
 
 then
 
-lock_zeitauswertung.lock()
-try
+// check if a rule is already running
+while (LOCAL_RULELOCK.state == ON)
 {
+    Thread::sleep(3000)
+}
+
+// set the Rulelock to block a second ruleexecution of "Timeclock_evaluation"
+LOCAL_RULELOCK.sendCommand(ON)
+
     // Loop through all items (member of group gTimeclock), witch can maped to a timeclock.
     gTimeclock.members.forEach[timeclock_item|{
         
-        // Loop through all items (member of group gTimeclockselection), whitch contains the timeclockmaping to each item.
+        // Loop through all items (member of group gTimeclockselection), whitch contains the timeclockmapping to each item.
         val selection_item = gTimeclockSelection.members.findFirst[i|i.name == "TIMER_"+timeclock_item.name] as NumberItem
 
         // Check if a item was found at all with the findFirst method
@@ -59,20 +60,13 @@ try
                     else timeclock_item.sendCommand(UP)
                 }
                 // Waittime is optional and im my case its for my RF-Outlets whitch need some time between each switching cycle
-                Thread::sleep(800)
+                Thread::sleep(1200)
             }
         }
 
     }]
 
-}
-catch(Throwable t)
-{
-    lock_zeitauswertung.unlock()
-}
-finally
-{
-    lock_zeitauswertung.unlock()
-}
+// reset the Rulelock to enable the ruleexecution of "Timeclock_evaluation"
+LOCAL_RULELOCK.sendCommand(OFF)
 
 end

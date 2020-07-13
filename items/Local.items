@@ -1,0 +1,4 @@
+// Global variable for locking the "Timeclock_evaluation" rule to prevent multible execution at the same time
+// The expire Binding acts like a watchdog, if some failure happens (mostly during start of openHAB) it resets the State to OFF
+// to release the locking.
+Switch LOCAL_RULELOCK   {expire="10m,state=OFF"}
